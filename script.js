@@ -24,20 +24,8 @@ function handleSubmit(event) {
     const enteredPassword = passwordInput.value;
 
     if (enteredPassword === correctPassword) {
-        // Senha correta - abrir em nova aba para garantir funcionamento
-        window.open(redirectUrl, '_blank', 'noopener,noreferrer');
-        
-        // Tentar também redirecionar a janela atual/pai
-        try {
-            if (window.top !== window.self) {
-                window.top.location.href = redirectUrl;
-            } else {
-                window.location.href = redirectUrl;
-            }
-        } catch (e) {
-            // Se houver erro de segurança, a nova aba já foi aberta
-            console.log('Redirecionamento aberto em nova aba');
-        }
+        // Senha correta - redirecionar na mesma aba
+        window.location.href = redirectUrl;
     } else {
         // Senha incorreta - mostrar erro
         errorMessage.classList.add('show');
@@ -71,3 +59,4 @@ document.getElementById('passwordInput').addEventListener('input', function() {
         this.style.boxShadow = 'none';
     }
 });
+
