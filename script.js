@@ -22,29 +22,32 @@ function handleSubmit(event) {
     const enteredPassword = passwordInput.value;
 
     if (enteredPassword === correctPassword) {
-        // Redireciona a página atual para o link de relatórios
-        window.location.href = redirectUrl;
+        // Abre a página de relatórios em nova aba
+        window.open(redirectUrl, '_blank', 'noopener,noreferrer');
     } else {
+        // Senha incorreta - mostrar erro
         errorMessage.classList.add('show');
         passwordInput.style.borderColor = 'rgba(239, 68, 68, 0.8)';
         passwordInput.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.3)';
         
+        // Limpar erro após 3 segundos
         setTimeout(() => {
             errorMessage.classList.remove('show');
             passwordInput.style.borderColor = 'rgba(255, 255, 255, 0.2)';
             passwordInput.style.boxShadow = 'none';
         }, 3000);
         
+        // Limpar campo
         passwordInput.value = '';
         passwordInput.focus();
     }
 }
 
 function focusPasswordInput() {
-    const passwordInput = document.getElementById('passwordInput');
-    passwordInput.focus();
+    document.getElementById('passwordInput').focus();
 }
 
+// Limpar erro quando usuário começar a digitar novamente
 document.getElementById('passwordInput').addEventListener('input', function() {
     const errorMessage = document.getElementById('errorMessage');
     if (errorMessage.classList.contains('show')) {
@@ -53,5 +56,3 @@ document.getElementById('passwordInput').addEventListener('input', function() {
         this.style.boxShadow = 'none';
     }
 });
-
-
