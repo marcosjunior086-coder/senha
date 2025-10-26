@@ -1,344 +1,73 @@
-body {
-    box-sizing: border-box;
-}
+const correctPassword = 'DM#KWAI';
+const redirectUrl = 'https://www.agencydmaior.com.br/relatorios';
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #4c1d95 50%, #1e1b4b 75%, #000000 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
-    position: relative;
-    overflow-x: hidden;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.background-effects {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.3;
-    animation: float 6s ease-in-out infinite;
-}
-
-.glow-orb:nth-child(1) {
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, #8b5cf6, transparent);
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
-}
-
-.glow-orb:nth-child(2) {
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle, #3b82f6, transparent);
-    top: 60%;
-    right: 15%;
-    animation-delay: 2s;
-}
-
-.glow-orb:nth-child(3) {
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, #6366f1, transparent);
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 4s;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-20px) scale(1.1); }
-}
-
-.top-nav {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    z-index: 100;
-}
-
-.nav-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.nav-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    transform: translateY(-2px);
-}
-
-.container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 48px 40px;
-    box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    max-width: 480px;
-    width: 90%;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-}
-
-.container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 24px;
-    padding: 2px;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.3), rgba(99, 102, 241, 0.3));
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    pointer-events: none;
-}
-
-.title {
-    font-size: 32px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 16px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    line-height: 1.2;
-}
-
-.subtitle {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 32px;
-    font-weight: 400;
-}
-
-.form-group {
-    margin-bottom: 24px;
-    position: relative;
-}
-
-.password-input {
-    width: 100%;
-    padding: 16px 60px 16px 20px;
-    font-size: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    color: white;
-    outline: none;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
-    z-index: 10;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.toggle-password:hover {
-    color: rgba(255, 255, 255, 0.9);
-    transform: scale(1.1);
-}
-
-.eye-icon {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-}
-
-.password-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.password-input:focus {
-    border-color: rgba(139, 92, 246, 0.8);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-    transform: translateY(-2px);
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 16px 24px;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-}
-
-.submit-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(139, 92, 246, 0.5);
-    background: linear-gradient(135deg, #9333ea, #2563eb);
-}
-
-.submit-btn:hover::before {
-    left: 100%;
-}
-
-.submit-btn:active {
-    transform: translateY(-1px);
-}
-
-.error-message {
-    color: #ef4444;
-    font-size: 14px;
-    margin-top: 12px;
-    font-weight: 500;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-.error-message.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.contact-info {
-    margin-top: 32px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.contact-text {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
-    margin-bottom: 16px;
-}
-
-.whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    background: linear-gradient(135deg, #20ba5a, #0f7a6b);
-}
-
-.whatsapp-icon {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-}
-
-@media (max-width: 640px) {
-    .container {
-        padding: 32px 24px;
-        margin: 20px;
-    }
-
-    .title {
-        font-size: 28px;
-    }
-
-    .subtitle {
-        font-size: 15px;
-    }
-
-    .top-nav {
-        top: 15px;
-        right: 20px;
-    }
-
-    .nav-link {
-        font-size: 13px;
-        padding: 6px 12px;
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('passwordInput');
+    const eyeIcon = document.getElementById('eyeIcon');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        // Ícone de olho riscado (senha visível)
+        eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+    } else {
+        passwordInput.type = 'password';
+        // Ícone de olho normal (senha oculta)
+        eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
     }
 }
 
-@media (max-width: 480px) {
-    .title {
-        font-size: 24px;
-    }
+function handleSubmit(event) {
+    event.preventDefault();
+    
+    const passwordInput = document.getElementById('passwordInput');
+    const errorMessage = document.getElementById('errorMessage');
+    const enteredPassword = passwordInput.value;
 
-    .container {
-        padding: 28px 20px;
+    if (enteredPassword === correctPassword) {
+        // Senha correta - abrir em nova aba para garantir funcionamento
+        window.open(redirectUrl, '_blank', 'noopener,noreferrer');
+        
+        // Tentar também redirecionar a janela atual/pai
+        try {
+            if (window.top !== window.self) {
+                window.top.location.href = redirectUrl;
+            } else {
+                window.location.href = redirectUrl;
+            }
+        } catch (e) {
+            // Se houver erro de segurança, a nova aba já foi aberta
+            console.log('Redirecionamento aberto em nova aba');
+        }
+    } else {
+        // Senha incorreta - mostrar erro
+        errorMessage.classList.add('show');
+        passwordInput.style.borderColor = 'rgba(239, 68, 68, 0.8)';
+        passwordInput.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.3)';
+        
+        // Limpar erro após 3 segundos
+        setTimeout(() => {
+            errorMessage.classList.remove('show');
+            passwordInput.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            passwordInput.style.boxShadow = 'none';
+        }, 3000);
+        
+        // Limpar campo
+        passwordInput.value = '';
+        passwordInput.focus();
     }
 }
+
+function focusPasswordInput() {
+    const passwordInput = document.getElementById('passwordInput');
+    passwordInput.focus();
+}
+
+// Limpar erro quando usuário começar a digitar novamente
+document.getElementById('passwordInput').addEventListener('input', function() {
+    const errorMessage = document.getElementById('errorMessage');
+    if (errorMessage.classList.contains('show')) {
+        errorMessage.classList.remove('show');
+        this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+        this.style.boxShadow = 'none';
+    }
+});
